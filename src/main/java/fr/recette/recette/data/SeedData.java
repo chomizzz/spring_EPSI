@@ -34,19 +34,16 @@ public class SeedData implements CommandLineRunner {
 		Recette recette2 = new Recette(null, "Salade Caprese", null);
 		List<Recette> recettes = recetteRepository.saveAll(Arrays.asList(recette1,
 				recette2));
-		// Create Ingredients
-		for (Item item : items) {
-			if (item.getNom().equals("Tomate")) {
-				ingredientRepository.save(new Ingredient(null, recettes.get(0), item, "2"));
-				ingredientRepository.save(new Ingredient(null, recettes.get(1), item, "1"));
-			} else if (item.getNom().equals("Pâtes")) {
-				ingredientRepository.save(new Ingredient(null, recettes.get(0), item,
-						"200"));
-			} else if (item.getNom().equals("Fromage")) {
-				ingredientRepository.save(new Ingredient(null, recettes.get(1), item,
-						"100"));
-			}
-		}
+
+		// On associe les item et les recettes
+		// Pate à la sauce tomate
+		ingredientRepository.save(new Ingredient(null, recette1, item1, "2"));
+		ingredientRepository.save(new Ingredient(null, recette1, item2, "200"));
+
+		// Salade Caprese
+		ingredientRepository.save(new Ingredient(null, recette2, item1, "2"));
+		ingredientRepository.save(new Ingredient(null, recette2, item3, "100"));
+
 		System.out.println("Database seeded successfully!");
 	}
 }
